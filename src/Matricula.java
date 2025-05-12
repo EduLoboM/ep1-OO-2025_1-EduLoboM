@@ -1,35 +1,35 @@
 public class Matricula {
-    private String status;
-    private float[] notas;
-    private int faltas;
+    boolean status;
+    int faltas;
+    float[] notas;
 
-    public Matricula(String status, float[] notas, int faltas) {
+    public void matricula(boolean status, int faltas, float[] notas){
         this.status = status;
-        this.notas = notas;
         this.faltas = faltas;
+        this.notas = notas;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
+    public void setStatus(boolean status){
         this.status = status;
     }
 
-    public float[] getNotas() {
-        return notas;
+    public void setFaltas(int faltas){
+        this.faltas = faltas;
     }
 
     public void setNotas(float[] notas) {
         this.notas = notas;
     }
 
-    public int getFaltas() {
+    public boolean getStatus(){
+        return status;
+    }
+
+    public int getFaltas (){
         return faltas;
     }
 
-    public void setFaltas(int faltas) {
-        this.faltas = faltas;
+    public float[] getNotas() {
+        return notas;
     }
 }

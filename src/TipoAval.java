@@ -1,2 +1,3 @@
-public class TipoAval {
+public interface TipoAval {
+    float calcular(float[] notas);
 }

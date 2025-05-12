@@ -1,36 +1,46 @@
-public class Disciplina {
-    private String nome;
-    private String codigo;
-    private int cargaH;
+import java.util.List;
 
-    // Constructor
-    public Disciplina(String nome, String codigo, int cargaH) {
-        this.nome = nome;
-        this.codigo = codigo;
+public class Disciplina {
+    String nomeD;
+    String codigoD;
+    int cargaH;
+    List<Disciplina> requisitos;
+
+    public void disciplina(String nomeD, String codigoD, int cargaH, List<Disciplina> requisitos){
+        this.nomeD = nomeD;
+        this.codigoD = codigoD;
+        this.cargaH = cargaH;
+        this.requisitos = requisitos;
+    }
+
+    public void setNomeD(String nomeD){
+        this.nomeD = nomeD;
+    }
+
+    public void setCodigoD(String codigoD){
+        this.codigoD = codigoD;
+    }
+
+    public void setCargaH(Integer cargaH){
         this.cargaH = cargaH;
     }
 
-    // Getters and Setters
-    public String getNome() {
-        return nome;
+    public void setRequisitos(List<Disciplina> requisitos) {
+        this.requisitos = requisitos;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public String getNomeD(){
+        return nomeD;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoD(){
+        return codigoD;
     }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public int getCargaH() {
+    public Integer getCargaH(){
         return cargaH;
     }
 
-    public void setCargaH(int cargaH) {
-        this.cargaH = cargaH;
+    public List<Disciplina> getRequisitos() {
+        return requisitos;
     }
+}

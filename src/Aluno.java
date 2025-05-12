@@ -1,35 +1,22 @@
-public class Aluno {
-    private String nomeA;
-    private int ida;
-    private String curso;
+import java.util.List;
 
-    public Aluno (String nomeA, int ida, String curso) {
-        this.nomeA = nomeA;
-        this.ida = ida;
+public class Aluno extends Pessoa {
+    String curso;
+    List<Disciplina> materias;
+
+    public void setCurso(String curso){
         this.curso = curso;
     }
 
-    public String getNomeA() {
-        return nomeA;
+    public void setMaterias(List<Disciplina> materias) {
+        this.materias = materias;
     }
 
-    public void setNomeA(String nome) {
-        this.nomeA = nome;
+    public String getCurso(){
+        return this.curso;
     }
 
-    public int getIda() {
-        return ida;
-    }
-
-    public void setIda(int ida) {
-        this.ida = ida;
-    }
-
-    public String getCurso() {
-        return nomeA;
-    }
-
-    public void setCurso(String curso) {
-        this.curso = curso;
+    public List<Disciplina> getMaterias() {
+        return materias;
     }
 }
