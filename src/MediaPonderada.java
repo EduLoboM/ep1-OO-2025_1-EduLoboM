@@ -4,7 +4,7 @@ public class MediaPonderada implements TipoAval{
     public MediaPonderada(float[] pesos) {
         this.pesos = pesos;
     }
-
+    @Override
     public float calcular(float[] notas) {
         float total = 0, somaPesos = 0;
         for (int i = 0; i < notas.length; i++) {

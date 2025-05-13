@@ -1,20 +1,25 @@
-public class Pessoa {
-    String nomeP;
-    int id;
+public abstract class Pessoa {
+    protected String nome;
+    protected int id;
 
-    public void setNomeP (String nomeP){
-        this.nomeP = nomeP;
-    }
-
-    public void setId (int id){
+    public Pessoa(String nome, int id) {
+        this.nome = nome;
         this.id = id;
     }
 
-    public String getNomeP (){
-        return this.nomeP;
+    public String getNome() {
+        return nome;
     }
 
-    public int getId (){
-        return this.id;
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

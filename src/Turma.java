@@ -1,72 +1,37 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Turma {
-    String codigoT;
-    int semestre;
-    int capacidade;
-    String horario;
-    String sala;
-    boolean presencial;
-    Professor professor;
-    Disciplina disciplina;
-    TipoAval tipoAval;
-    List<Aluno> alunos;
+    private String codigo;
+    private int semestre;
+    private int capacidade;
+    private String horario;
+    private String sala; // null or empty if remote
+    private boolean presencial;
+    private Professor professor;
+    private Disciplina disciplina;
+    private TipoAval tipoAval;
+    private List<Matricula> matriculas;
+    private int totalAulas;
 
-    public void turma(String codigoT, int semestre, int capacidade, String horario, String sala, boolean presencial, Professor professor, Disciplina disciplina, TipoAval tipoAval, List<Aluno> alunos) {
-        this.codigoT = codigoT;
+    public Turma(String codigo, int semestre, int capacidade, String horario,
+                 boolean presencial, String sala, Professor professor,
+                 Disciplina disciplina, TipoAval tipoAval, int totalAulas) {
+        this.codigo = codigo;
         this.semestre = semestre;
         this.capacidade = capacidade;
         this.horario = horario;
-        this.sala = sala;
         this.presencial = presencial;
+        this.sala = presencial ? sala : null;
         this.professor = professor;
         this.disciplina = disciplina;
         this.tipoAval = tipoAval;
-        this.alunos = alunos;
+        this.totalAulas = totalAulas;
+        this.matriculas = new ArrayList<>();
     }
 
-    public void setCodigoT(String codigoT) {
-        this.codigoT = codigoT;
-    }
-
-    public void setSemestre(int semestre) {
-        this.semestre = semestre;
-    }
-
-    public void setCapacidade(int capacidade) {
-        this.capacidade = capacidade;
-    }
-
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
-
-    public void setSala(String sala) {
-        this.sala = sala;
-    }
-
-    public void setPresencial(boolean presencial) {
-        this.presencial = presencial;
-    }
-
-    public void setProfessor(Professor professor) {
-        this.professor = professor;
-    }
-
-    public void setDisciplina(Disciplina disciplina) {
-        this.disciplina = disciplina;
-    }
-
-    public void setTipoAval(TipoAval tipoAval) {
-        this.tipoAval = tipoAval;
-    }
-
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
-
-    public String getCodigoT() {
-        return codigoT;
+    public String getCodigo() {
+        return codigo;
     }
 
     public int getSemestre() {
@@ -85,7 +50,7 @@ public class Turma {
         return sala;
     }
 
-    public boolean getPresencial() {
+    public boolean isPresencial() {
         return presencial;
     }
 
@@ -101,7 +66,15 @@ public class Turma {
         return tipoAval;
     }
 
-    public List<Aluno> getAlunos() {
-        return alunos;
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    public int getTotalAulas() {
+        return totalAulas;
+    }
+
+    public boolean hasVaga() {
+        return matriculas.size() < capacidade;
     }
 }

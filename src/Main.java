@@ -1,10 +1,12 @@
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
-
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("i = " + i);
+        Sistema sistema = new Sistema();
+        try {
+            sistema.iniciarCLI();
+        } catch (IOException e) {
+            System.err.println("Erro ao iniciar a interface de linha de comando: " + e.getMessage());
         }
     }
 }

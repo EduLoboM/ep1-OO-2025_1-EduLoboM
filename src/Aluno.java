@@ -1,22 +1,38 @@
+import java.util.ArrayList;
 import java.util.List;
 
-public class Aluno extends Pessoa {
-    String curso;
-    List<Disciplina> materias;
+public abstract class Aluno extends Pessoa {
+    protected String curso;
+    protected List<Disciplina> materias;
+    protected List<Matricula> matriculas;
 
-    public void setCurso(String curso){
+    public Aluno(String nome, int id, String curso) {
+        super(nome, id);
         this.curso = curso;
+        this.materias = new ArrayList<>();
+        this.matriculas = new ArrayList<>();
     }
 
-    public void setMaterias(List<Disciplina> materias) {
-        this.materias = materias;
+    public String getCurso() {
+        return curso;
     }
 
-    public String getCurso(){
-        return this.curso;
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
 
     public List<Disciplina> getMaterias() {
         return materias;
     }
+
+    public List<Matricula> getMatriculas() {
+        return matriculas;
+    }
+
+    /**
+     * Cada subclasse implementa sua regra de matrícula.
+     */
+    public abstract boolean matricular(Turma turma);
+
+    public abstract void trancarDisciplina(Turma turma);
 }

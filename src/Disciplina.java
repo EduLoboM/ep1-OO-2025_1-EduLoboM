@@ -1,46 +1,47 @@
 import java.util.List;
 
 public class Disciplina {
-    String nomeD;
-    String codigoD;
-    int cargaH;
-    List<Disciplina> requisitos;
+    private String nome;
+    private String codigo;
+    private int cargaHoraria;
+    private List<Disciplina> requisitos;
 
-    public void disciplina(String nomeD, String codigoD, int cargaH, List<Disciplina> requisitos){
-        this.nomeD = nomeD;
-        this.codigoD = codigoD;
-        this.cargaH = cargaH;
+    public Disciplina(String nome, String codigo, int cargaHoraria, List<Disciplina> requisitos) {
+        this.nome = nome;
+        this.codigo = codigo;
+        this.cargaHoraria = cargaHoraria;
         this.requisitos = requisitos;
     }
 
-    public void setNomeD(String nomeD){
-        this.nomeD = nomeD;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCodigoD(String codigoD){
-        this.codigoD = codigoD;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setCargaH(Integer cargaH){
-        this.cargaH = cargaH;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setRequisitos(List<Disciplina> requisitos) {
-        this.requisitos = requisitos;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public String getNomeD(){
-        return nomeD;
+    public int getCargaHoraria() {
+        return cargaHoraria;
     }
 
-    public String getCodigoD(){
-        return codigoD;
-    }
-    public Integer getCargaH(){
-        return cargaH;
+    public void setCargaHoraria(int cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
     }
 
     public List<Disciplina> getRequisitos() {
         return requisitos;
+    }
+
+    public void setRequisitos(List<Disciplina> requisitos) {
+        this.requisitos = requisitos;
     }
 }
