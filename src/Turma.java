@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Turma {
     private String codigo;
@@ -76,5 +77,12 @@ public class Turma {
 
     public boolean hasVaga() {
         return matriculas.size() < capacidade;
+    }
+
+    public List<Aluno> getAlunos() {
+        return matriculas.stream()
+                .filter(Matricula::isStatus)         // só as matrículas ativas
+                .map(Matricula::getAluno)            // extrai o Aluno
+                .collect(Collectors.toList());
     }
 }

@@ -155,6 +155,14 @@ public class Sistema {
                 pw.printf("%d,%s,%s,%b%n", a.getId(), a.getNome(), a.getCurso(), a instanceof AlunoEspecial);
             }
         }
+
+        try (PrintWriter pw = new PrintWriter(new FileWriter(pasta + "/professores.csv"))) {
+            pw.println("id,nome");
+            for (Professor a : professores) {
+                pw.printf("%d,%s%n", a.getId(), a.getNome());
+            }
+        }
+
         try (PrintWriter pw = new PrintWriter(new FileWriter(pasta + "/disciplinas.csv"))) {
             pw.println("codigo,nome,carga,reqs");
             for (Disciplina d : disciplinas) {
@@ -169,11 +177,7 @@ public class Sistema {
         try (PrintWriter pw = new PrintWriter(new FileWriter(pasta + "/turmas.csv"))) {
             pw.println("codigo,semestre,prof,disc,presc,sala,horario,cap,totalAulas");
             for (Turma t : turmas) {
-                pw.printf("%s,%d,%d,%s,%b,%s,%s,%d,%d%n",
-                        t.getCodigo(), t.getSemestre(), t.getProfessor().getId(),
-                        t.getDisciplina().getCodigo(), t.isPresencial(),
-                        t.getSala()!=null?t.getSala():"", t.getHorario(), t.getCapacidade(), t.getTotalAulas());
-            }
+                pw.printf("%s,%d,%d,%s,%b,%s,%s,%d,%d%n", t.getCodigo(), t.getSemestre(), t.getProfessor().getId(), t.getDisciplina().getCodigo(), t.isPresencial(), t.getSala()!=null?t.getSala():"", t.getHorario(), t.getCapacidade(), t.getTotalAulas());}
         }
         try (PrintWriter pw = new PrintWriter(new FileWriter(pasta + "/matriculas.csv"))) {
             pw.println("aluno,disc,status,faltas,notas");

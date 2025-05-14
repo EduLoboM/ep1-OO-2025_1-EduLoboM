@@ -1,1 +1,3 @@
 codigo,nome,carga,reqs
+FGA1,APC,60,
+FGA2,OO,60,FGA1
