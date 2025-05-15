@@ -347,105 +347,197 @@ public class Sistema {
         }
     }
 
-    // CLI
+    // -- Utilitários CLI --
+    private void clearScreen() {
+        System.out.print("\033[H\033[2J"); System.out.flush();
+    }
+
+    private void printBanner() {
+        System.out.println("                                                 d8,      d8b                     ");
+        System.out.println("                                               `8P       88P                     ");
+        System.out.println("                                                        d88                      ");
+        System.out.println("?88,.d88b,  88bd88b d8888b  d888b8b    88bd88b  88b d888888   d888b8b   d888b8b  ");
+        System.out.println("`?88'  ?88  88P'  `d8P' ?88d8P' ?88    88P'  `  88Pd8P' ?88  d8P' ?88  d8P' ?88  ");
+        System.out.println("  88b  d8P d88     88b  d8888b  ,88b  d88      d88 88b  ,88b 88b  ,88b 88b  ,88b ");
+        System.out.println("  888888P'd88'     `?8888P'`?88P'`88bd88'     d88' `?88P'`88b`?88P'`88b`?88P'`88b");
+        System.out.println("  88P'                            )88                                            ");
+        System.out.println(" d88                             ,88P                                            ");
+        System.out.println(" ?8P                         `?8888P                                            \n");
+    }
+
+    private void waitEnter(Scanner sc) {
+        System.out.println("\nPressione Enter para continuar...");
+        sc.nextLine();
+    }
+
+    // -- CLI Principal --
     public void iniciarCLI() throws IOException {
         Scanner sc = new Scanner(System.in);
         String pasta = ".";
         int opt;
         do {
-            System.out.println("\n1-Cad Aluno 2-Cad Disc 3-Cad Prof 4-Cad Turma");
-            System.out.println("5-Mat 6-Trancar 7-Notas 8-Freq 9-RelT 10-RelD");
-            System.out.println("11-RelP 12-Boletim 13-Salvar 14-Carregar 0-Sair");
-            opt = sc.nextInt(); sc.nextLine();
-            switch (opt) {
-                case 1:
-                    System.out.print("Nome: "); String n = sc.nextLine();
-                    System.out.print("ID: "); int i = sc.nextInt(); sc.nextLine();
-                    System.out.print("Curso: "); String c = sc.nextLine();
-                    System.out.print("Especial? (true/false): "); boolean e = sc.nextBoolean(); sc.nextLine();
-                    cadastrarAluno(n, i, c, e);
-                    break;
-                case 2:
-                    System.out.print("Nome Disc: "); String nd = sc.nextLine();
-                    System.out.print("Codigo: "); String cd = sc.nextLine();
-                    System.out.print("CargaH: "); int ch = sc.nextInt(); sc.nextLine();
-                    System.out.print("Requisitos (codigos; separados): "); String rl = sc.nextLine();
-                    cadastrarDisciplina(nd, cd, ch, Arrays.asList(rl.split(";")));
-                    break;
-                case 3:
-                    System.out.print("Nome Prof: "); String np = sc.nextLine();
-                    System.out.print("ID Prof: "); int ip = sc.nextInt(); sc.nextLine();
-                    cadastrarProfessor(np, ip);
-                    break;
-                case 4:
-                    System.out.print("Turma cod: "); String tc = sc.nextLine();
-                    System.out.print("Semestre: "); int sm = sc.nextInt(); sc.nextLine();
-                    System.out.print("Prof ID: "); int pid = sc.nextInt(); sc.nextLine();
-                    System.out.print("Disc cod: "); String dsc = sc.nextLine();
-                    System.out.print("Presencial? (true/false): "); boolean pr = sc.nextBoolean(); sc.nextLine();
-                    System.out.print("Sala (ou vazio): "); String sl = sc.nextLine();
-                    System.out.print("Horario: "); String hr = sc.nextLine();
-                    System.out.print("Capacidade: "); int cp = sc.nextInt(); sc.nextLine();
-                    System.out.print("Total Aulas: "); int ta = sc.nextInt(); sc.nextLine();
-                    System.out.print("Tipo Aval (1-simples/2-pond): "); int tv = sc.nextInt(); sc.nextLine();
-                    TipoAval aval = (tv == 1) ? new MediaSimples() : new MediaPonderada(new float[]{1,2,3,1,1});
-                    criarTurma(tc, sm, pid, dsc, pr, sl, hr, cp, aval, ta);
-                    break;
-                case 5:
-                    System.out.print("Turma cod: "); String tm = sc.nextLine();
-                    System.out.print("Aluno ID: "); int aid = sc.nextInt(); sc.nextLine();
-                    matricular(tm, aid);
-                    break;
-                case 6:
-                    System.out.print("Turma cod: "); String tt = sc.nextLine();
-                    System.out.print("Aluno ID: "); int aid2 = sc.nextInt(); sc.nextLine();
-                    trancar(tt, aid2);
-                    break;
-                case 7:
-                    System.out.print("Turma cod: "); String tn = sc.nextLine();
-                    System.out.print("Aluno ID: "); int aid3 = sc.nextInt(); sc.nextLine();
-                    System.out.print("Notas (5 floats; separados): ");
-                    String[] parts = sc.nextLine().split(";");
-                    float[] nsArr = new float[parts.length];
-                    for (int idx = 0; idx < parts.length; idx++) {
-                        nsArr[idx] = Float.parseFloat(parts[idx]);
-                    }
-                    lancarNotas(tn, aid3, nsArr);
-                    break;
-                case 8:
-                    System.out.print("Turma cod: "); String tf = sc.nextLine();
-                    System.out.print("Aluno ID: "); int aid4 = sc.nextInt(); sc.nextLine();
-                    System.out.print("Faltas: "); int fl = sc.nextInt(); sc.nextLine();
-                    lancarFrequencia(tf, aid4, fl);
-                    break;
-                case 9:
-                    System.out.print("Turma cod: "); String rt = sc.nextLine();
-                    System.out.println(gerarRelatorioTurma(rt));
-                    break;
-                case 10:
-                    System.out.print("Disciplina cod: "); String rd = sc.nextLine();
-                    System.out.println(gerarRelatorioDisciplina(rd));
-                    break;
-                case 11:
-                    System.out.print("Professor ID: "); int rp = sc.nextInt(); sc.nextLine();
-                    System.out.println(gerarRelatorioProfessor(rp));
-                    break;
-                case 12:
-                    System.out.print("Aluno ID: "); int rA = sc.nextInt(); sc.nextLine();
-                    System.out.print("Incluir dados da turma? (true/false): "); boolean inc = sc.nextBoolean(); sc.nextLine();
-                    System.out.println(gerarBoletimAluno(rA, inc));
-                    break;
-                case 13:
-                    salvarDados(pasta);
-                    System.out.println("Dados salvos em " + pasta);
-                    break;
-                case 14:
-                    carregarDados(pasta);
-                    System.out.println("Dados carregados de " + pasta);
-                    break;
+            clearScreen(); printBanner();
+            System.out.println("+--------------------------------------------------------------+");
+            System.out.println("|                          PROGRIDAA                           |");
+            System.out.println("|         Programa de Gerenciamento Acadêmico Avançado         |");
+            System.out.println("+--------------------------------------------------------------+");
+            System.out.println("| 1) Cadastrar Aluno            2) Cadastrar Disciplina        |");
+            System.out.println("| 3) Cadastrar Professor        4) Criar Turma                 |");
+            System.out.println("| 5) Matricular                 6) Trancar Disciplina          |");
+            System.out.println("| 7) Lançar Notas               8) Lançar Frequencia           |");
+            System.out.println("| 9) Relatório Turma            10) Relatório Disciplina       |");
+            System.out.println("| 11) Relatório Professor       12) Boletim Aluno              |");
+            System.out.println("| 13) Salvar Dados              14) Carregar Dados             |");
+            System.out.println("| 0) Sair                                                      |");
+            System.out.println("+--------------------------------------------------------------+");
+            System.out.print("Escolha uma opção: "); opt = sc.nextInt(); sc.nextLine();
+            try {
+                switch (opt) {
+                    case 1: cadastrarAlunoCLI(sc); break;
+                    case 2: cadastrarDisciplinaCLI(sc); break;
+                    case 3: cadastrarProfessorCLI(sc); break;
+                    case 4: criarTurmaCLI(sc); break;
+                    case 5: matricularCLI(sc); break;
+                    case 6: trancarCLI(sc); break;
+                    case 7: lancarNotasCLI(sc); break;
+                    case 8: lancarFrequenciaCLI(sc); break;
+                    case 9: relatorioTurmaCLI(sc); break;
+                    case 10: relatorioDisciplinaCLI(sc); break;
+                    case 11: relatorioProfessorCLI(sc); break;
+                    case 12: boletimAlunoCLI(sc); break;
+                    case 13:
+                        salvarDados(pasta);
+                        System.out.println("Dados salvos em " + pasta);
+                        waitEnter(sc);
+                        break;
+                    case 14:
+                        carregarDados(pasta);
+                        System.out.println("Dados carregados de " + pasta);
+                        waitEnter(sc);
+                        break;
+                    case 0: System.out.println("Saindo..."); break;
+                    default:
+                        System.out.println("Opção inválida!");
+                        waitEnter(sc);
+                }
+            } catch (Exception e) {
+                System.out.println("Erro: " + e.getMessage());
+                waitEnter(sc);
             }
         } while (opt != 0);
         sc.close();
+    }
+
+    // -- Métodos CLI por opção --
+    private void cadastrarAlunoCLI(Scanner sc) {
+        System.out.print("Nome: "); String n = sc.nextLine();
+        System.out.print("ID: "); int i = sc.nextInt(); sc.nextLine();
+        System.out.print("Curso: "); String c = sc.nextLine();
+        System.out.print("Especial? (true/false): "); boolean e = sc.nextBoolean(); sc.nextLine();
+        cadastrarAluno(n, i, c, e);
+        waitEnter(sc);
+    }
+
+    private void cadastrarDisciplinaCLI(Scanner sc) {
+        System.out.print("Nome Disciplina: "); String nd = sc.nextLine();
+        System.out.print("Código: "); String cd = sc.nextLine();
+        System.out.print("Carga Horária: "); int ch = sc.nextInt(); sc.nextLine();
+        System.out.print("Requisitos (códigos; separados por ';'): "); String rl = sc.nextLine();
+        cadastrarDisciplina(nd, cd, ch, Arrays.asList(rl.split(";")));
+        waitEnter(sc);
+    }
+
+    private void cadastrarProfessorCLI(Scanner sc) {
+        System.out.print("Nome Professor: "); String np = sc.nextLine();
+        System.out.print("ID Professor: "); int ip = sc.nextInt(); sc.nextLine();
+        cadastrarProfessor(np, ip);
+        waitEnter(sc);
+    }
+
+    private void criarTurmaCLI(Scanner sc) {
+        System.out.print("Código Turma: "); String tc = sc.nextLine();
+        System.out.print("Semestre: "); int sm = sc.nextInt(); sc.nextLine();
+        System.out.print("Professor ID: "); int pid = sc.nextInt(); sc.nextLine();
+        System.out.print("Disciplina Código: "); String dsc = sc.nextLine();
+        System.out.print("Presencial? (true/false): "); boolean pr = sc.nextBoolean(); sc.nextLine();
+        System.out.print("Sala (ou vazio): "); String sl = sc.nextLine();
+        System.out.print("Horário: "); String hr = sc.nextLine();
+        System.out.print("Capacidade: "); int cp = sc.nextInt(); sc.nextLine();
+        System.out.print("Total Aulas: "); int ta = sc.nextInt(); sc.nextLine();
+        System.out.print("Tipo Aval (1-simples/2-ponderada): "); int tv = sc.nextInt(); sc.nextLine();
+        TipoAval aval = (tv == 1) ? new MediaSimples() : new MediaPonderada(new float[]{1,2,3,1,1});
+        criarTurma(tc, sm, pid, dsc, pr, sl, hr, cp, aval, ta);
+        waitEnter(sc);
+    }
+
+    private void matricularCLI(Scanner sc) {
+        System.out.print("Código Turma: "); String tm = sc.nextLine();
+        System.out.print("Aluno ID: "); int aid = sc.nextInt(); sc.nextLine();
+        boolean ok = matricular(tm, aid);
+        System.out.println(ok ? "Matrícula realizada!" : "Turma cheia ou erro.");
+        waitEnter(sc);
+    }
+
+    private void trancarCLI(Scanner sc) {
+        System.out.print("Código Turma: "); String tt = sc.nextLine();
+        System.out.print("Aluno ID: "); int aid2 = sc.nextInt(); sc.nextLine();
+        trancar(tt, aid2);
+        System.out.println("Trancamento efetuado!");
+        waitEnter(sc);
+    }
+
+    private void lancarNotasCLI(Scanner sc) {
+        System.out.print("Código Turma: ");
+        String tn = sc.nextLine();
+
+        System.out.print("Aluno ID: ");
+        int aid3 = sc.nextInt();
+        sc.nextLine(); // consumir quebra de linha
+
+        System.out.print("Notas (separadas por ';'): ");
+        String[] parts = sc.nextLine().split(";");
+        float[] ns = new float[parts.length];
+        for (int i = 0; i < parts.length; i++) {
+            ns[i] = Float.parseFloat(parts[i].trim());
+        }
+
+        lancarNotas(tn, aid3, ns);
+        System.out.println("Notas lançadas!");
+        waitEnter(sc);
+    }
+
+    private void lancarFrequenciaCLI(Scanner sc) {
+        System.out.print("Código Turma: "); String tf = sc.nextLine();
+        System.out.print("Aluno ID: "); int aid4 = sc.nextInt(); sc.nextLine();
+        System.out.print("Faltas: "); int fl = sc.nextInt(); sc.nextLine();
+        lancarFrequencia(tf, aid4, fl);
+        System.out.println("Frequência atualizada!");
+        waitEnter(sc);
+    }
+
+    private void relatorioTurmaCLI(Scanner sc) {
+        System.out.print("Código Turma: "); String rt = sc.nextLine();
+        System.out.println(gerarRelatorioTurma(rt));
+        waitEnter(sc);
+    }
+
+    private void relatorioDisciplinaCLI(Scanner sc) {
+        System.out.print("Código Disciplina: "); String rd = sc.nextLine();
+        System.out.println(gerarRelatorioDisciplina(rd));
+        waitEnter(sc);
+    }
+
+    private void relatorioProfessorCLI(Scanner sc) {
+        System.out.print("Professor ID: "); int rp = sc.nextInt(); sc.nextLine();
+        System.out.println(gerarRelatorioProfessor(rp));
+        waitEnter(sc);
+    }
+
+    private void boletimAlunoCLI(Scanner sc) {
+        System.out.print("Aluno ID: "); int rA = sc.nextInt(); sc.nextLine();
+        System.out.print("Incluir dados da turma? (true/false): "); boolean inc = sc.nextBoolean(); sc.nextLine();
+        System.out.println(gerarBoletimAluno(rA, inc));
+        waitEnter(sc);
     }
 
     private Turma getTurma(String codigo) {
