@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class AlunoEspecial extends Aluno {
     private static final int MAX_DISCIPLINAS = 2;
 

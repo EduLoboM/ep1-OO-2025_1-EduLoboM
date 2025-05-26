@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class AlunoNormal extends Aluno {
     public AlunoNormal(String nome, int id, String curso) {
         super(nome, id, curso);

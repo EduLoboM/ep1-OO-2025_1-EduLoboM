@@ -1,3 +1,5 @@
 codigo,nome,carga,reqs
-FGA1,APC,60,
-FGA2,OO,60,FGA1
+MAT0025,Calculo 1,90,
+MAT0026,Calculo 2,90,MAT0025
+CIC0004,APC,60,
+FGA0168,DIAC,60,

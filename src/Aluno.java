@@ -29,9 +29,6 @@ public abstract class Aluno extends Pessoa {
         return matriculas;
     }
 
-    /**
-     * Cada subclasse implementa sua regra de matrícula.
-     */
     public abstract boolean matricular(Turma turma);
 
     public abstract void trancarDisciplina(Turma turma);
