@@ -103,7 +103,7 @@ https://drive.google.com/file/d/1BFbnHOb71LiSl3DMSlFcvg_ivYPn1RHK/view?usp=shari
    ![Inserir Print 3](./print3.PNG)
 
 4. Diagrama de classes:  
-   ![Inserir Print 4](./diagrama.png)
+   ![Inserir Print 4](./DIAGRAMA.png)
 
 ---
 
