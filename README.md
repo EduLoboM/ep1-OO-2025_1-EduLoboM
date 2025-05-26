@@ -94,16 +94,16 @@ https://drive.google.com/file/d/1BFbnHOb71LiSl3DMSlFcvg_ivYPn1RHK/view?usp=shari
 ## Prints da Execução
 
 1. Menu Principal:  
-   ![Inserir Print 1](print1.png)
+   ![Inserir Print 1](./print1.PNG)
 
 2. Cadastro de Aluno:  
-   ![Inserir Print 2](print2.png)
+   ![Inserir Print 2](./print2.PNG)
 
 3. Relatório de Frequência/Notas:  
-   ![Inserir Print 3](print3.png)
+   ![Inserir Print 3](./print3.PNG)
 
 4. Diagrama de classes:  
-   ![Inserir Print 4](diagrama.png)
+   ![Inserir Print 4](./diagrama.png)
 
 ---
 
